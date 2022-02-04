@@ -58,12 +58,12 @@
       >Log In</c-button>
     </c-box>
     <c-box
-      :width="['70%','50%']"
+      :width="['100%','50%']"
       p="20px"
       v-else
     >
       <c-text
-        fontSize="3xl"
+        :fontSize="['2xl', '3xl']"
       >
         You're logged in <br />
         <c-link
@@ -150,12 +150,20 @@ export default {
     ...mapState(['user'])
   },
   methods: {
-    ...mapActions(['signIn']),
+    ...mapActions(['signIn', 'addReport']),
     showModal() {
       this.modal = !this.modal
     },
     submitReport() {
       this.formLoader = true
+      this.addReport(this.report).then(() => {
+        this.formLoader = false
+        this.showModal()
+        alert('Report submitted')
+      }).catch(error => {
+        this.formLoader = false
+        alert(error.message)
+      })
     },
     logUserIn() {
       this.authLoader = true
