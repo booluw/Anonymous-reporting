@@ -7,7 +7,10 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "@chakra-ui/vue": "^0.11.0",
+    "@emotion/css": "^11.7.1",
     "core-js": "^3.6.5",
+    "firebase": "^9.6.5",
     "register-service-worker": "^1.7.1",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",
@@ -19,6 +22,7 @@
     "@vue/cli-plugin-router": "~4.5.0",
     "@vue/cli-plugin-vuex": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
+    "chakra-loader": "^1.0.3",
     "vue-template-compiler": "^2.6.11"
   },
   "browserslist": [
