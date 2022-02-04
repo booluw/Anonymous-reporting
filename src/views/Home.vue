@@ -38,7 +38,7 @@
     :px="['10','4']"
     :py="['10px','20%']"
   >
-    <c-box as="form" @submit.prevent :width="['70%','50%']" m="0 auto" v-if="!user">
+    <c-box as="form" @submit.prevent :width="['70%','50%']" m="0 auto" v-if="user">
       <c-form-control mb="5" is-required>
         <c-form-label for="name">Email</c-form-label>
         <c-input type="email" id="email" borderColor="blue.300" v-model="auth.email"/>
