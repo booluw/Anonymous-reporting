@@ -38,7 +38,7 @@
     :px="['10','4']"
     :py="['10px','20%']"
   >
-    <c-box as="form" @submit.prevent :width="['70%','50%']" m="0 auto">
+    <c-box as="form" @submit.prevent :width="['70%','50%']" m="0 auto" v-if="!user">
       <c-form-control mb="5" is-required>
         <c-form-label for="name">Email</c-form-label>
         <c-input type="email" id="email" borderColor="blue.300" v-model="auth.email"/>
@@ -54,8 +54,27 @@
         height="50px"
         cursor="pointer"
         :isLoading="authLoader"
-        @click="logUerIn()"
+        @click="logUserIn()"
       >Log In</c-button>
+    </c-box>
+    <c-box
+      :width="['70%','50%']"
+      p="20px"
+      v-else
+    >
+      <c-text
+        fontSize="3xl"
+      >
+        You're logged in <br />
+        <c-link
+          as="router-link"
+          to="/dashboard"
+          fontSize="xl"
+          color="blue.300"
+        >
+          Go to dashboard
+        </c-link>
+      </c-text>
     </c-box>
   </c-box>
   <c-modal
@@ -113,6 +132,8 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex'
+
 export default {
   data() {
     return {
@@ -125,15 +146,25 @@ export default {
       auth: {}
     }
   },
+  computed: {
+    ...mapState(['user'])
+  },
   methods: {
+    ...mapActions(['signIn']),
     showModal() {
       this.modal = !this.modal
     },
     submitReport() {
       this.formLoader = true
     },
-    logUerIn() {
+    logUserIn() {
       this.authLoader = true
+      this.signIn(this.auth).then(() => {
+        this.$router.push('/dashboard')
+      }).catch(error => {
+        alert(error.message)
+        this.authLoader = false
+      })
     }
   }
 }
