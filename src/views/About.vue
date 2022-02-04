@@ -178,49 +178,45 @@
       </c-flex>
     </c-box>
     <c-modal
-      :display="['block', 'none']"
       :is-open="isOpen"
       :on-close="close"
       is-centered
       class="booluw-modal"
+      size="xl"
     >
       <c-modal-content ref="content" class="booluw-modal">
-        <c-modal-header>Modal Title</c-modal-header>
-        <c-modal-close-button />
-        <c-modal-body>
-          <c-box
-            :display="['none', 'block']"
-            style="box-sizing: border-box"
-            m="0 10px"
-            p="20px"
-            border="2px"
-            borderColor="gray.100"
-            bg="gray.50"
-            rounded="lg"
-            position="relative"
-            v-if="Object.keys(view).length !== 0"
+        <c-modal-header>
+          <c-text
+            color="red.300"
+            fontSize="20px"
+            m="0 20px 10px 0"
+            p="0"
+            fontWeight="bold"
           >
             <c-text
-              color="red.300"
-              fontSize="30px"
-              m="0 0 10px"
+              color="gray.500"
               p="0"
-              fontWeight="bold"
+              m="0"
+              display="inline"
+              fontWeight="normal"
             >
-              <c-text
-                color="gray.500"
-                p="0"
-                m="0"
-                display="inline"
-                fontWeight="normal"
-              >
-                Report filed against:
-              </c-text>
-              {{ view.student_name}}
+              Report filed against:
             </c-text>
+            {{ view.student_name}}
+          </c-text>
+        </c-modal-header>
+        <c-modal-close-button />
+        <c-modal-body
+          pb="50px"
+        >
+          <c-box
+            style="box-sizing: border-box"
+            rounded="lg"
+            position="relative"
+          >
             <c-text
               color="gray.700"
-              fontSize="20px"
+              fontSize="16px"
               m="0 0 10px"
               p="0"
               fontWeight="bold"
@@ -238,7 +234,7 @@
             </c-text>
             <c-text
               color="gray.700"
-              fontSize="20px"
+              fontSize="16px"
               m="0 0 10px"
               p="0"
               fontWeight="bold"
@@ -255,7 +251,7 @@
               {{  moment(view.date).format("dddd, MMMM Do YYYY") }}
             </c-text>
             <c-text
-              fontSize="16px"
+              fontSize="20px"
               color="gray.500"
               m="20px 0 0"
               p="10px 0 0"
@@ -264,19 +260,6 @@
             >
               {{ view.description }}
             </c-text>
-            <c-icon-button
-              variant-color="vue"
-              aria-label="Call Jonathan"
-              size="lg"
-              icon="check"
-              border="none"
-              cursor="pointer"
-              position="absolute"
-              bottom="40px"
-              @click="checkAsSuccess()"
-              v-if="view.status === 'pending'"
-              title="Mark as done"
-            />
           </c-box>
         </c-modal-body>
       </c-modal-content>
